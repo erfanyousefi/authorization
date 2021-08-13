@@ -7,7 +7,7 @@ const ExpressEjsLayouts = require("express-ejs-layouts")
 require("dotenv").config();
 cookieParser("momo-secret");
 const Routes = require("./routes/index")
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 8000;
 const DB_URL = `${process.env.DB_URL}/${process.env.DB_NAME}`;
 const DB_OPTIONS = {
     useCreateIndex: true,
@@ -24,7 +24,7 @@ module.exports = class Application {
     }
     configServer() {
         const server = http.createServer(app);
-        server.listen(PORT, () => {
+        server.listen(PORT, "localhost", () => {
             console.log(`Server run on ${PORT} port...`)
         })
     }
@@ -42,10 +42,10 @@ module.exports = class Application {
         app.use(express.static("public"));
         app.use(ExpressEjsLayouts);
         app.set("view engine", "ejs");
-        app.set("view", "./resource/views");
+        app.set("views", "resource/views");
         app.set("layout extractStyles", true);
         app.set("layout extractScripts", true);
-        app.set("layouts", "layouts/master")
+        app.set("layout", "layouts/master")
     }
     configRoutes(){
         app.use(Routes)
