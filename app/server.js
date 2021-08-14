@@ -6,7 +6,10 @@ const http = require("http");
 const ExpressEjsLayouts = require("express-ejs-layouts")
 require("dotenv").config();
 cookieParser("momo-secret");
-const Routes = require("./routes/index")
+const Routes = require("./routes/index");
+const session = require("express-session");
+const MongoStore = require("connect-mongo")(session);
+const passport = require("passport")
 const PORT = process.env.PORT || 8000;
 const DB_URL = `${process.env.DB_URL}/${process.env.DB_NAME}`;
 const DB_OPTIONS = {
@@ -30,15 +33,15 @@ module.exports = class Application {
     }
     connectToDB() {
         mongoose.connect(DB_URL, DB_OPTIONS, error => {
-            if(!error){
+            if (!error) {
                 console.log("Connect to DB successfuly");
-            }else{
+            } else {
                 console.log(`Can not connect TO DB`);
                 // console.log(error);
             }
         })
     }
-    configApplication(){
+    configApplication() {
         app.use(express.static("public"));
         app.use(ExpressEjsLayouts);
         app.set("view engine", "ejs");
@@ -46,8 +49,24 @@ module.exports = class Application {
         app.set("layout extractStyles", true);
         app.set("layout extractScripts", true);
         app.set("layout", "layouts/master")
+        app.use(cookieParser("momoSecret"));
+        app.set(session({
+            secret: "momoSecret",
+            resave: true,
+            saveUninitialized: true,
+            store: new MongoStore({
+                mongooseConnection: mongoose.connection
+            }),
+            cookie: {
+                secure: true
+            }
+        }));
+        app.use(passport.initialize());
+        app.use(passport.session())
+        app.use(methodOverride("_method"));
+
     }
-    configRoutes(){
+    configRoutes() {
         app.use(Routes)
     }
 }

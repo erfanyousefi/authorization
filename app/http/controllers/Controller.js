@@ -25,4 +25,7 @@ module.exports = class Controller {
     verifyJWTToken(token){
         return jwt.verify(token, `${process.env.JWT_SECRET}`, {algorithms : "HS256"});
     }
+    momoGenerator(){
+        return "6th length digit"
+    }
 }
