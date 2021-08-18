@@ -6,7 +6,7 @@ const UserSchema = new Schema({
     password: { type: String, required: true },
     token: { type: String, defualt: "" },
     memoCode: { type: String, default: "" },
-    walletCode: { type: String, default: undefined }
+    wallet: { type: String, default: undefined },
 }, {
     timestamps: true
 });

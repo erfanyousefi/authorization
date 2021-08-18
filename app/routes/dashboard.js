@@ -6,4 +6,5 @@ router.use((req, res, next) => {
 })
 const Dashboardontroller = require("../http/controllers/Dashboard")
 router.get("/", Dashboardontroller.indexPage)
+router.post("/wallet", Dashboardontroller.saveWallet)
 module.exports = router;

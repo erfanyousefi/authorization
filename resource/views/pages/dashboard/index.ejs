@@ -1,18 +1,31 @@
 <div class="main-container">
     <h2>Dashboard</h2>
     <p class="memo">
-        Your Name: <span><%=user.name%></span><span class="tool" data-tip="When transferring BNB, make sure to enter this Memo code so that we can identify which transaction belongs to you" tabindex="1">?</span> <br/>
-        <br>Your Email: <span><%=user.email%></span><span class="tool" data-tip="When transferring BNB, make sure to enter this Memo code so that we can identify which transaction belongs to you" tabindex="1">?</span> <br/>
-        <br/>Your Memo: <span><%=user.memoCode%></span><span class="tool" data-tip="When transferring BNB, make sure to enter this Memo code so that we can identify which transaction belongs to you" tabindex="1">?</span>
+        Your Name: <span>
+            <%=user.name%>
+        </span><br />
+        <br>Your Email: <span>
+            <%=user.email%>
+        </span><br />
+        <br />Your Memo: <span>
+            <%=user.memoCode%>
+        </span><span class="tool" data-tip="When transferring BNB, make sure to enter this Memo code so that we can identify which transaction belongs to you" tabindex="1">?</span>
     </p>
 
 
     <div class="wallet-container">
         <p>Your Dinstagram Wallet:</p>
-        <div>
-            <input type="" placeholder="Wallet ID" />
-            <button>Send</button>
-        </div>
+        <%if(user.wallet){%>
+            <div>
+                <%=user.wallet%>
+            </div>
+            <%}else{%>
+                <form action="/dashboard/wallet" method="POST" enctype="application/x-www-form-urlencoded">
+                    <input type="text" name="wallet" placeholder="Wallet ID" />
+                    <button type="submit">Send</button>
+                </form>
+                <%}%>
+
     </div>
     <div class="d-container">
         <h3>Binance-Dinstagram Converter</h3>

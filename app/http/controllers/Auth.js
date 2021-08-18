@@ -69,6 +69,7 @@ class Auth extends Controller {
     registerPassport(req, res, next) {
         errorList = {}
         passport.authenticate("local.register", (err, user) => {
+            console.log(err);
             if (err) {
                 errorList.errorMessage = err.error || "Some thing wnt wrong try again"
                 res.redirect("/auth/register");

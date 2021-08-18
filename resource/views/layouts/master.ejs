@@ -125,7 +125,7 @@
                         </nav>
                     </div>
                     <div class="registration">
-                        <%if(req.isAuthentication()){%>
+                        <%if(req.isAuthenticated()){%>
                             <a href="/dashboard/profile" class="register">Profile</a>
                             <a href="/logout" class="login">Logout</a>
                             <%}else{%>
@@ -201,7 +201,7 @@
     <script src="/plugins/menu/menu.js"></script>
     <!-- Activation Script -->
     <script src="/js/custom.js"></script>
-    <%-include(viewPath("layouts /messages"), messages)%>
+    <%-include(viewPath("layouts/messages"), messages)%>
 
 </body>
 
