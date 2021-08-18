@@ -1,6 +1,5 @@
 const Controller = require("./Controller");
 const passport = require("passport");
-const Captcha = require("nodejs-captcha")
 const { validationResult } = require("express-validator")
 let errorList = {}
 class Auth extends Controller {
