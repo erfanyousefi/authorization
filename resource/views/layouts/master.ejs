@@ -1,15 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Momo</title>
-    <%-style%>
-</head>
-<body>
-    <%-body%>
 
-    <%-script%>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Disgram Token</title>
+    <link rel="shortcut icon" href="/image/favicon.png" type="image/x-icon" />
+    <!-- Bootstrap , fonts & icons  -->
+    <link rel="stylesheet" href="/css/bootstrap.css" />
+    <link rel="stylesheet" href="/fonts/icon-font/css/style.css" />
+    <link rel="stylesheet" href="/fonts/typography-font/typo.css" />
+    <link rel="stylesheet" href="/fonts/fontawesome-5/css/all.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;500;700;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+    <!-- Plugin'stylesheets  -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" id="theme-styles">
+    <link rel="stylesheet" href="/plugins/aos/aos.min.css" />
+    <link rel="stylesheet" href="/plugins/fancybox/jquery.fancybox.min.css" />
+    <!-- Vendor stylesheets  -->
+    <link rel="stylesheet" href="/css/main.css" />
+    <style>
+        .btn .byBtn:link,
+        .btn .byBtn:visited {
+            text-decoration: none;
+            border-radius: 100rem;
+            transition: all .2s;
+            position: relative
+        }
+        
+        .btn--white .byBtn {
+            color: #777
+        }
+        
+        .btn--white .byBtn,
+        .btn--white .byBtn:after {
+            background-color: #fff
+        }
+        
+        .btn .byBtn:hover {
+            transform: translateY(-.3rem);
+            box-shadow: 0 10rem 20rem rgba(0, 0, 0, .2)
+        }
+        
+        .btn .byBtn:active {
+            box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2);
+            transform: translateY(-.1rem)
+        }
+        
+        .btn .byBtn:after {
+            content: "";
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+            border-radius: 10rem;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            transition: all .4s;
+            opacity: .8
+        }
+        
+        .btn .byBtn:hover:after {
+            transform: scaleX(1.1) scaleY(1.5);
+            opacity: 0
+        }
+        
+        .btn--animated .byBtn {
+            -webkit-animation: moveInBottom 1s ease-in .7s;
+            animation: moveInBottom 1s ease-in .7s;
+            -webkit-animation-fill-mode: backwards;
+            animation-fill-mode: backwards
+        }
+    </style>
+    <!-- Custom stylesheet -->
+</head>
+
+<body data-theme-mode-panel-active data-theme="light" style="font-family: 'Mazzard H'">
+    <div class="site-wrapper overflow-hidden position-relative">
+        <!--Site Header Area -->
+        <header class="
+          site-header site-header--menu-center
+          dark-mode-texts
+          landing-17-menu
+          site-header--absolute site-header--sticky
+        ">
+            <div class="container">
+                <nav class="navbar site-navbar">
+                    <!-- Brand Logo-->
+                    <div class="brand-logo">
+                        <a href="/">
+                            <!-- light version logo (logo must be black)-->
+                            <img src="/image/logo/logo-black.png" alt="" class="light-version-logo" />
+                            <!-- Dark version logo (logo must be White)-->
+                            <img src="/image/logo/logo-white.png" alt="" class="dark-version-logo" />
+                        </a>
+                    </div>
+                    <div class="menu-block-wrapper">
+                        <div class="menu-overlay"></div>
+                        <nav class="menu-block" id="append-menu-header">
+                            <div class="mobile-menu-head">
+                                <div class="go-back">
+                                    <i class="fa fa-angle-left"></i>
+                                </div>
+                                <div class="current-menu-title"></div>
+                                <div class="mobile-menu-close">&times;</div>
+                            </div>
+                            <ul class="site-menu-main">
+                                <li class="nav-item">
+                                    <a href="/whitepaper/" class="nav-link-item">White Paper</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link-item">Products</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/about-us" class="nav-link-item">About Us</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="registration">
+                        <%if(req.isAuthentication()){%>
+                            <a href="/dashboard/profile" class="register">Profile</a>
+                            <a href="/logout" class="login">Logout</a>
+                            <%}else{%>
+                                <a href="/auth/login" class="login">Login</a>
+                                <a href="/auth/register" class="register">Register</a>
+                                <%}%>
+                    </div>
+                    <!-- mobile menu trigger -->
+                    <div class="mobile-menu-trigger">
+                        <span></span>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <!-- navbar- -->
+        <div class="hero-area-l-17 position-relative">
+            <div class="container">
+                <div class="row position-relative justify-content-center">
+                    <div class="col-xxl-6 col-xl-7 col-lg-8 col-md-11 order-lg-1 order-1" data-aos="fade-right" data-aos-duration="800" data-aos-once="true">
+                        <div class="content text-center">
+                            <h1>Dinstagram Token</h1>
+                            <p>The largest decentralized social network in the world</p>
+                            <a href="#" class="btn byBtn">Buy Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%-body%>
+
+            <!--Footer Area-->
+            <footer class="footer-area-l-17 position-relative pt-5">
+                <div class="footer-shape">
+                    <!-- <img src="image/l8/footer-shape.svg" alt=""> -->
+                </div>
+                <div class="container pt-lg-23 pt-15 pb-12"></div>
+                <!-- footer-bottom start -->
+                <div class="copyright-area-l-17 text-center text-md-start mt-0">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-lg-4 col-md-4 pb-2">
+                                <div class="copyright">
+                                    <p>&copy; Dinstagram 2021 All right reserved.</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 col-md-6"></div>
+                            <div class="col-lg-3 col-md-2">
+                                <div class="social-icons text-md-end">
+                                    <ul class="pl-0 list-unstyled">
+                                        <li class="d-inline-block">
+                                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                        </li>
+                                        <li class="d-inline-block">
+                                            <a href="#"><i class="fab fa-twitter"></i></a>
+                                        </li>
+                                        <li class="d-inline-block">
+                                            <a href="#"><i class="fab fa-instagram"></i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+    </div>
+    <!-- Vendor Scripts -->
+    <script src="/js/vendor.min.js"></script>
+    <!-- Plugin's Scripts -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/plugins/fancybox/jquery.fancybox.min.js"></script>
+    <script src="/plugins/aos/aos.min.js"></script>
+    <script src="/plugins/menu/menu.js"></script>
+    <!-- Activation Script -->
+    <script src="/js/custom.js"></script>
+    <%-include(viewPath("layouts /messages"), messages)%>
+
 </body>
+
 </html>

@@ -1,0 +1,25 @@
+<div class="form-container">
+    <h3>Login</h3>
+    <form action="/auth/login" method="POST" enctype="application/x-www-form-urlencoded">
+        <div class="field form-email">
+            <input type="email" name="email" placeholder="Email Address" />
+            <strong class="text-danger">
+                <%=messages.email?messages.email : ''%>
+            </strong>
+        </div>
+
+        <div class="field form-password">
+            <input type="password" name="password" placeholder="Password" />
+            <strong class="text-danger">
+                <%=messages.password?messages.password : ''%>
+            </strong>
+        </div>
+        <div id="buttons">
+            <button type="submit">Login</button>
+            <p>
+                Don't have an account?
+                <a href="/auth/register">Register</a>
+            </p>
+        </div>
+    </form>
+</div>

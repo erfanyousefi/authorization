@@ -1,0 +1,31 @@
+<%if(messages.successMessage){%>
+    <script>
+        Swal.fire({
+
+            icon: 'success',
+            text: `<%=messages.successMessage%>`,
+            confirmButtonText: `Ok`,
+            confirmButtonColor: '#28A745'
+        })
+    </script>
+    <%}%>
+        <%if(messages.errorMessage){%>
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    text: `<%=messages.errorMessage%>`,
+                    showDenyButton: true,
+                    showConfirmButton: false,
+                    denyButtonText: "Close!"
+                })
+            </script>
+            <%}%>
+                <%if(messages.infoMessage){%>
+                    <script>
+                        Swal.fire({
+                            icon: 'info',
+                            text: '<%=messages.infoModal%>',
+                            confirmButtonText: `Ok`,
+                        })
+                    </script>
+                    <%}%>

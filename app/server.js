@@ -8,8 +8,9 @@ require("dotenv").config();
 cookieParser("momo-secret");
 const Routes = require("./routes/index");
 const session = require("express-session");
-const MongoStore = require("connect-mongo")(session);
 const passport = require("passport")
+const methodOverride = require("method-override")
+const Helper = require("./Helpers")
 const PORT = process.env.PORT || 8000;
 const DB_URL = `${process.env.DB_URL}/${process.env.DB_NAME}`;
 const DB_OPTIONS = {
@@ -18,6 +19,7 @@ const DB_OPTIONS = {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }
+const Auth = require("./http/middlewares/Auth")
 module.exports = class Application {
     constructor() {
         this.configServer();
@@ -42,6 +44,9 @@ module.exports = class Application {
         })
     }
     configApplication() {
+        require("./passport/passport-local")
+        app.use(express.json());
+        app.use(express.urlencoded({ extended: true }));
         app.use(express.static("public"));
         app.use(ExpressEjsLayouts);
         app.set("view engine", "ejs");
@@ -54,17 +59,18 @@ module.exports = class Application {
             secret: "momoSecret",
             resave: true,
             saveUninitialized: true,
-            store: new MongoStore({
-                mongooseConnection: mongoose.connection
-            }),
             cookie: {
                 secure: true
             }
         }));
         app.use(passport.initialize());
-        app.use(passport.session())
+        app.use(passport.session());
         app.use(methodOverride("_method"));
-
+        app.use((req, res, next) => {
+            app.locals = new Helper(req, res).object();
+            next();
+        })
+        app.use(Auth.autoLogin)
     }
     configRoutes() {
         app.use(Routes)

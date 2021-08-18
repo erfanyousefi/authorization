@@ -1,0 +1,37 @@
+<div class="form-container">
+    <h3>Registration</h3>
+    <form action="/auth/register" method="POST" enctype="application/x-www-form-urlencoded">
+        <div class="field form-name">
+            <input type="text" placeholder="Name" name="name" />
+            <strong class="text-danger">
+                <%=messages.name?messages.name : ''%>
+            </strong>
+        </div>
+
+        <div class="field form-email">
+            <input type="email" placeholder="Email Address" name="email" />
+            <strong class="text-danger">
+                <%=messages.email?messages.email : ''%>
+            </strong>
+        </div>
+
+        <div class="field form-password">
+            <input type="password" placeholder="Password" name="password" />
+            <strong class="text-danger">
+                <%=messages.password?messages.password : ''%>
+            </strong>
+        </div>
+        <div class="field form-confirm-password">
+            <input type="password" placeholder="Confirm Password" name="confirmpassword" />
+            <strong class="text-danger">
+                <%=messages.confirmpassword?messages.confirmpassword : ''%>
+            </strong>
+        </div>
+        <div id="buttons">
+            <button type="submit">Register</button>
+            <p>
+                Already have an account? <a href="/auth/login">Login</a>
+            </p>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,124 @@
+body {
+    background: #fff;
+}
+
+header {
+    background: #1d263a;
+}
+
+.hero-area-l-17 {
+    display: none !important;
+}
+
+.form-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 100px);
+    margin: 130px 0px 50px;
+}
+
+form {
+    width: 500px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top: none;
+    height: fit-content;
+}
+
+.form-container h3 {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    width: 500px;
+    color: #1d263a;
+    text-align: center;
+    margin: 0;
+    padding: 10px 20px;
+}
+
+form .field {
+    display: flex;
+    flex-direction: column;
+    margin: 30px;
+    color: #1d263a;
+}
+
+form input {
+    border: 1px solid #dcdcdc;
+    border-radius: 3px;
+    padding: 5px 10px;
+    background: #fff;
+}
+
+form input:focus {
+    outline: none;
+    border-color: #a5a5a5;
+}
+
+form input::placeholder {
+    font-weight: 200;
+}
+
+#buttons {
+    display: flex;
+    align-items: flex-end;
+    margin: 10px 30px 30px;
+    justify-content: space-between;
+}
+
+#buttons p {
+    margin: 0;
+    font-size: 0.8rem;
+}
+
+#buttons a {
+    color: #1d263a !important;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+form button {
+    background: #50e3c2;
+    border: none;
+    padding: 10px 25px;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 3px;
+    transition: all 0.2s ease;
+}
+
+form button:hover {
+    color: #1d263a;
+}
+
+@media (max-width: 550px) {
+    form {
+        width: 400px;
+    }
+    .form-container h3 {
+        width: 400px;
+    }
+}
+
+@media (max-width: 450px) {
+    form {
+        width: 300px;
+    }
+    .form-container h3 {
+        width: 300px;
+    }
+    #buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-left: 10px;
+    }
+    #buttons p {
+        margin-top: 10px;
+    }
+    form .field {
+        margin: 30px 10px;
+    }
+}

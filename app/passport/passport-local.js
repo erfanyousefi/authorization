@@ -2,12 +2,13 @@ const Strategy = require("passport-local").Strategy;
 const UserModel = require("./../models/user");
 const bcrypt = require("bcrypt")
 const passport = require("passport");
-passport.serializeUser(function (user, done) {
+
+passport.serializeUser(function(user, done) {
     done(null, user.id);
 });
 
-passport.deserializeUser(function (id, done) {
-    UserModel.findById(id, function (err, user) {
+passport.deserializeUser(function(id, done) {
+    UserModel.findById(id, function(err, user) {
         done(err, user);
     });
 });
@@ -18,37 +19,39 @@ passport.use("local.login", new Strategy({
     passReqToCallback: true
 }, (req, email, password, done) => {
     UserModel.findOne({ email }, (err, user) => {
+        console.log(err);
         if (err) {
             return done({
-                message: "User could not be found."
+                error: "User could not be found."
             }, null);
-        } if (user) {
+        }
+        if (user) {
 
             if (bcrypt.compareSync(password, user.password)) {
                 return done(null, user);
             } else {
                 return done({
-                    message: `Incorrect email or password.
+                    error: `Incorrect email or password.
                      Enter your sign in information again,
                       or request an email to gain access to your account.`
                 }, null);
             }
         } else {
             return done({
-                message: "User could not be found."
+                error: "User could not be found."
             }, null);
         }
     });
 }))
 
-passport.use("local.register", new LocalStrategy({
+passport.use("local.register", new Strategy({
     usernameField: "email",
     passwordField: "password",
     passReqToCallback: true
-}, (req, email, password, done) => {
-    userModel.findOne({
+}, async(req, email, password, done) => {
+    UserModel.findOne({
         email
-    }, (err, user) => {
+    }, async(err, user) => {
         if (err) {
             done({
                 error: "Sorry, there was a problem. try again"
@@ -56,29 +59,48 @@ passport.use("local.register", new LocalStrategy({
         }
         if (user) {
             done({
-                error: "That email is taken. Try another"
+                error: "An account with Email already exist"
             }, null);
         } else {
-            let salt = bcrypt.genSaltSync(15);
-            let hash = bcrypt.hashSync(password, salt);
-            userModel.create({
-                name: req.body.name,
-                email,
-                password: hash
-            }, (err, user) => {
-                if (err) {
-                    done({
-                        error: "Sorry, there was a problem. try again"
-                    }, null);
-                }
-                if (user) {
-                    done(null, user)
-                } else {
-                    done({
-                        error: "Sorry, there was a problem. try again"
-                    }, null);
-                }
-            });
+            if (password === req.body.confirmpassword) {
+                let memoCode = await memoGenerator()
+                let salt = bcrypt.genSaltSync(15);
+                let hash = bcrypt.hashSync(password, salt);
+                UserModel.create({
+                    name: req.body.name,
+                    memoCode,
+                    email,
+                    password: hash
+                }, (err, user) => {
+                    if (err) {
+                        done({
+                            error: "Sorry, there was a problem. try again"
+                        }, null);
+                    }
+                    if (user) {
+                        done(null, user)
+                    } else {
+                        done({
+                            error: "Sorry, there was a problem. try again"
+                        }, null);
+                    }
+                });
+            } else {
+                done({
+                    error: "The password confirmation does not match."
+                }, null);
+            }
         }
+
     })
 }));
+
+async function memoGenerator() {
+    let memoCode = Math.floor(100000 + Math.random() * 900000)
+    let user = await UserModel.findOne({ memoCode });
+    if (user) {
+        this.memoGenerator()
+    } else {
+        return memoCode;
+    }
+}

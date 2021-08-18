@@ -1,0 +1,108 @@
+<div class="main-container">
+    <h2>Dashboard</h2>
+    <p class="memo">
+        Your Name: <span><%=user.name%></span><span class="tool" data-tip="When transferring BNB, make sure to enter this Memo code so that we can identify which transaction belongs to you" tabindex="1">?</span> <br/>
+        <br>Your Email: <span><%=user.email%></span><span class="tool" data-tip="When transferring BNB, make sure to enter this Memo code so that we can identify which transaction belongs to you" tabindex="1">?</span> <br/>
+        <br/>Your Memo: <span><%=user.memoCode%></span><span class="tool" data-tip="When transferring BNB, make sure to enter this Memo code so that we can identify which transaction belongs to you" tabindex="1">?</span>
+    </p>
+
+
+    <div class="wallet-container">
+        <p>Your Dinstagram Wallet:</p>
+        <div>
+            <input type="" placeholder="Wallet ID" />
+            <button>Send</button>
+        </div>
+    </div>
+    <div class="d-container">
+        <h3>Binance-Dinstagram Converter</h3>
+        <div class="convert-container">
+            <div class="bnb-container">
+                <p>Binance Price:</p>
+                <input id="binance" placeholder="Binance Amount" />
+            </div>
+            <div class="dis-container">
+                <p>Dinstagram Price: 0.00001 $</p>
+                <input id="dinstagram" placeholder="Dinstagram Amount" />
+            </div>
+        </div>
+        <span></span>
+    </div>
+    <div class="qr-code">
+        <h3>Our BNB Wallet:</h3>
+        <img src="../image/bnbwallet.jpg" alt="QR Code">
+        <p><span>Address to Receive BNB:</span> bnb1m4jkycgwhttkzspehl5dcxjgxew7hhfe80627r</p>
+    </div>
+    <div class="note">
+        <h4>FAQ</h4>
+        <h3>1. Should I have Trust Wallet?</h3>
+        <p>
+            Yes, you should. because we transfer your Dinstagram tokens to your Dinstagram account which is created in Trust Wallet.
+        </p>
+        <h3>2. How to create a Dinstagram account in Trust Wallet?</h3>
+        <div class="landing-container">
+            <div class="col-lg-4 col-md-6 col-sm-9 pb-5 step-holder">
+                <div class="content section-heading-11">
+                    <h3 class="step-header">Step 1</h3>
+                    <p class="width-wide">
+                        Open your Trust Wallet and click on Token List button
+                    </p>
+                    <img src="../image/step1.png" />
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-9 pb-5 step-holder">
+                <div class="content section-heading-11">
+                    <h3 class="step-header">Step 2</h3>
+                    <p class="width-wide">
+                        Scroll to bottom and click on "Add Custom Token"
+                    </p>
+                    <img src="../image/step2.png" />
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-9 pb-5 step-holder">
+                <div class="content section-heading-11">
+                    <h3 class="step-header">Step 3</h3>
+                    <p class="width-wide">
+                        Change Network to "Smart Chain"
+                    </p>
+                    <img src="../image/step3.png" />
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-9 pb-5 step-holder">
+                <div class="content section-heading-11">
+                    <h3 class="step-header">Step 4</h3>
+                    <p class="width-wide">
+                        Enter "Contract Address" of Dinstagram token and save it
+                    </p>
+                    <img src="../image/step4.png" />
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-9 pb-5 step-holder">
+                <div class="content section-heading-11">
+                    <h3 class="step-header">Step 5</h3>
+                    <p class="width-wide">
+                        After it Dinstagram token will be listed in Trust Wallet
+                    </p>
+                    <img src="../image/step5.png" />
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-9 pb-5 step-holder">
+                <div class="content section-heading-11">
+                    <h3 class="step-header">Step 6</h3>
+                    <p class="width-wide">
+                        Now you can copy your Dinstagram wallet Address
+                    </p>
+                    <img src="../image/step6.png" />
+                </div>
+            </div>
+        </div>
+        <h3 style="margin-top: 40px;">3. What is your "Contract Address?</h3>
+        <p>Here is our "Contract Address": <span class="contract">0x68F4BaA5EBcBc58B94C62f189ED82617f60d6B10</span></p>
+        <h3>4. How to buy Dinstagram tokens?</h3>
+        <p>After Creating your Dinstagram account in Trust Wallet (which is explained in previous FAQ) you can access your Dinstagram wallet address. in first step send this wallet address to us in the field above. Then use the above converter to calculate
+            the amount of DIS tokens you need. Then transfer the same amount of BNB to our wallet and be sure to enter the Memo code so we can know that the transaction is yours. After this process, we will send you the purchased tokens to your DIS wallet</p>
+        <h3>5. What is Memo?</h3>
+        <p>Every user has a unique memo. you should enter this memo code when transfering BNB to us, so we can recognize your transactions and transfer DIS tokens to your wallet.</p>
+    </div>
+</div>

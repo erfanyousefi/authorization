@@ -1,46 +1,86 @@
 const Controller = require("./Controller");
 const passport = require("passport");
+const Captcha = require("nodejs-captcha")
+const { validationResult } = require("express-validator")
+let errorList = {}
 class Auth extends Controller {
+    loginForm(req, res, next) {
+        res.render("./pages/auth/login", {
+            messages: errorList
+        })
+        errorList = {}
+    }
+    registerForm(req, res, next) {
+        res.render("./pages/auth/register", {
+            messages: errorList
+        })
+        errorList = {}
+    }
     loginProcess(req, res, next) {
-
+        errorList = {}
+        const result = validationResult(req)
+        if (result.isEmpty()) {
+            this.login(req, res, next);
+        } else {
+            this.errorHandler(result.errors, errorList)
+            res.redirect("/auth/login")
+        }
     }
     login(req, res, next) {
+        errorList = {}
         passport.authenticate("local.login", {
             passReqToCallback: true
         }, (err, user) => {
             if (err) {
-                //error handler
+                console.log(err);
+                errorList.errorMessage = err.error || "Some thing wnt wrong try again"
                 res.redirect("/auth/login");
             }
             if (user) {
                 req.login(user, err => {
                     if (err) {
                         //error handler
-                        res.redirect("/login");
+                        console.log(err);
+                        errorList.errorMessage = err.error || "Some thing wnt wrong try again";
+                        res.redirect("/auth/login");
                     }
                     if (user) {
                         //login process ....
-                        res.redirect("/");
+                        const token = this.jwtGenerator(user._id, user.email);
+                        this.setCookie(res, token)
+                        user.token = token;
+                        user.save();
+                        res.redirect("/dashboard");
                     }
                 })
             }
         })(req, res, next)
     }
-    registerProcess(req, res, next) {
+    async registerProcess(req, res, next) {
+        errorList = {}
+        const result = validationResult(req)
+        if (result.isEmpty()) {
+            this.registerPassport(req, res, next);
+        } else {
+            this.errorHandler(result.errors, errorList)
+            res.redirect("/auth/register")
+        }
 
     }
-    registerPassport() {
+    registerPassport(req, res, next) {
+        errorList = {}
         passport.authenticate("local.register", (err, user) => {
             if (err) {
-                if (err.error) {
-                    //error handler....
-                    res.redirect("/register");
-                }
+                errorList.errorMessage = err.error || "Some thing wnt wrong try again"
+                res.redirect("/auth/register");
             }
             if (user) {
-                let message = `Thanks for signing up. Welcome to our community.`;
                 //signup process ....
-                res.redirect("/register");
+                const token = this.jwtGenerator(user._id, user.email);
+                this.setCookie(res, token)
+                user.token = token;
+                user.save();
+                res.redirect("/dashboard");
             }
         })(req, res, next)
     }
