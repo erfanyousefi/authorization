@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="/css/login.css" />
     <!-- Custom stylesheet -->
     <link rel="stylesheet" href="/css/style.css" />
+    <%-style%>
 </head>
 
 <body data-theme-mode-panel-active data-theme="light" style="font-family: 'Mazzard H'">
@@ -71,8 +72,14 @@
                         </nav>
                     </div>
                     <div class="registration">
-                        <a href="/auth/login" class="login">Login</a>
-                        <a href="/auth/register" class="register">Register</a>
+                        <%if(req.isAuthenticated()){%>
+                            <a href="/dashboard" class="register">Dashboard</a>
+                            <a href="/logout" class="login">Logout</a>
+                            <%}else{%>
+                                <a href="/auth/login" class="login">Login</a>
+                                <a href="/auth/register" class="register">Register</a>
+                                <%}%>
+
                     </div>
                     <div class="mobile-menu-trigger">
                         <span></span>
@@ -129,7 +136,7 @@
     <!-- Activation Script -->
     <script src="/js/scripts.js"></script>
     <script src="/js/custom.js"></script>
-    <%-include(viewPath("layouts/messages"), messages)%>
+    <%-include(viewPath(`layouts/messages`), messages)%>
 
 </body>
 

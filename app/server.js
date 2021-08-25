@@ -12,7 +12,7 @@ const passport = require("passport")
 const methodOverride = require("method-override")
 const Helper = require("./Helpers")
 const PORT = process.env.PORT || 8000;
-const DB_URL = `${process.env.DB_URL}/${process.env.DB_NAME}`;
+const DB_URL = `${process.env.DB_URL}`;
 const DB_OPTIONS = {
     useCreateIndex: true,
     useFindAndModify: false,
@@ -34,14 +34,18 @@ module.exports = class Application {
         })
     }
     connectToDB() {
-        mongoose.connect(DB_URL, DB_OPTIONS, error => {
-            if (!error) {
-                console.log("Connect to DB successfuly");
-            } else {
-                console.log(`Can not connect TO DB`);
-                // console.log(error);
-            }
-        })
+        try {
+            mongoose.connect("mongodb+srv://memo_Admin:UNI06jbpczWBD8nD@cluster0.b2c9w.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", DB_OPTIONS, error => {
+                if (!error) {
+                    console.log("Connect to DB successfuly");
+                } else {
+                    console.log(`Can not connect TO DB`);
+                    // console.log(error);
+                }
+            })
+        } catch (err) {
+            console.log(err);
+        }
     }
     configApplication() {
         require("./passport/passport-local")
@@ -74,5 +78,12 @@ module.exports = class Application {
     }
     configRoutes() {
         app.use(Routes)
+        app.use((req, res, next) => {
+            res.locals.layout = "layouts/authMaster"
+            res.status(404).render("pages/errors/404", {
+                messages: {}
+            })
+            next()
+        })
     }
 }

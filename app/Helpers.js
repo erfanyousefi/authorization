@@ -14,6 +14,6 @@ module.exports = class Helper {
         }
     }
     viewPath(dir) {
-        return path.resolve(path.resolve('./resource/views') + '/' + dir)
+        return path.join(path.resolve('./resource/views'), dir)
     }
 }

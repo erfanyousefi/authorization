@@ -24,61 +24,63 @@
     <link rel="stylesheet" href="/plugins/fancybox/jquery.fancybox.min.css" />
     <!-- Vendor stylesheets  -->
     <link rel="stylesheet" href="/css/main.css" />
-    <style>
-        .btn .byBtn:link,
-        .btn .byBtn:visited {
-            text-decoration: none;
-            border-radius: 100rem;
-            transition: all .2s;
-            position: relative
-        }
-        
-        .btn--white .byBtn {
-            color: #777
-        }
-        
-        .btn--white .byBtn,
-        .btn--white .byBtn:after {
-            background-color: #fff
-        }
-        
-        .btn .byBtn:hover {
-            transform: translateY(-.3rem);
-            box-shadow: 0 10rem 20rem rgba(0, 0, 0, .2)
-        }
-        
-        .btn .byBtn:active {
-            box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2);
-            transform: translateY(-.1rem)
-        }
-        
-        .btn .byBtn:after {
-            content: "";
-            display: inline-block;
-            width: 100%;
-            height: 100%;
-            border-radius: 10rem;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: -1;
-            transition: all .4s;
-            opacity: .8
-        }
-        
-        .btn .byBtn:hover:after {
-            transform: scaleX(1.1) scaleY(1.5);
-            opacity: 0
-        }
-        
-        .btn--animated .byBtn {
-            -webkit-animation: moveInBottom 1s ease-in .7s;
-            animation: moveInBottom 1s ease-in .7s;
-            -webkit-animation-fill-mode: backwards;
-            animation-fill-mode: backwards
-        }
-    </style>
-    <!-- Custom stylesheet -->
+    <%-style%>
+
+        <style>
+            .btn .byBtn:link,
+            .btn .byBtn:visited {
+                text-decoration: none;
+                border-radius: 100rem;
+                transition: all .2s;
+                position: relative
+            }
+            
+            .btn--white .byBtn {
+                color: #777
+            }
+            
+            .btn--white .byBtn,
+            .btn--white .byBtn:after {
+                background-color: #fff
+            }
+            
+            .btn .byBtn:hover {
+                transform: translateY(-.3rem);
+                box-shadow: 0 10rem 20rem rgba(0, 0, 0, .2)
+            }
+            
+            .btn .byBtn:active {
+                box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2);
+                transform: translateY(-.1rem)
+            }
+            
+            .btn .byBtn:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+                height: 100%;
+                border-radius: 10rem;
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: -1;
+                transition: all .4s;
+                opacity: .8
+            }
+            
+            .btn .byBtn:hover:after {
+                transform: scaleX(1.1) scaleY(1.5);
+                opacity: 0
+            }
+            
+            .btn--animated .byBtn {
+                -webkit-animation: moveInBottom 1s ease-in .7s;
+                animation: moveInBottom 1s ease-in .7s;
+                -webkit-animation-fill-mode: backwards;
+                animation-fill-mode: backwards
+            }
+        </style>
+        <!-- Custom stylesheet -->
 </head>
 
 <body data-theme-mode-panel-active data-theme="light" style="font-family: 'Mazzard H'">
@@ -126,7 +128,7 @@
                     </div>
                     <div class="registration">
                         <%if(req.isAuthenticated()){%>
-                            <a href="/dashboard/profile" class="register">Profile</a>
+                            <a href="/dashboard" class="register">Dashboard</a>
                             <a href="/logout" class="login">Logout</a>
                             <%}else{%>
                                 <a href="/auth/login" class="login">Login</a>
