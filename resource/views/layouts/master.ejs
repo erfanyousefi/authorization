@@ -150,7 +150,7 @@
                         <div class="content text-center">
                             <h1>Dinstagram Token</h1>
                             <p>The largest decentralized social network in the world</p>
-                            <a href="#" class="btn byBtn">Buy Now</a>
+                            <a href="<%=req.isAuthenticated()?'/dashboard' : '/auth/login'%>" class="btn byBtn">Buy Now</a>
                         </div>
                     </div>
                 </div>
